@@ -1,5 +1,7 @@
 
 const registerBtn = document.getElementById('register-btn');
+const db = firebase.database();
+
 
 registerBtn.addEventListener('click', function () {
     const fullName = document.getElementById('fullname').value;
@@ -23,6 +25,7 @@ registerBtn.addEventListener('click', function () {
         
           }).then(function() {
             // Profile updated successfully!
+            db.ref('/loggedin').child(user.uid).set(user.displayName);
             window.location.href = 'index.html';
 
           }, function(error) {
